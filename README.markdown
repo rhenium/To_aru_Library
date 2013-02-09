@@ -7,13 +7,13 @@ __CC0__ (No Rights Reserved)
 
 # To_aru_Library
 
-PHPにあると思ったけど無かった的な関数・クラス集。
+PHPにあると思ったけど無かった的な関数・クラス集。  
 以前はTwitter関連も全部ここにまとめてありましたが分離させました。
 
 ## [EasyCrypt]
 
 ### メソッド仕様
-string EasyCrypt:: __encrypt__ (string $data, string $salt)
+string EasyCrypt:: __encrypt__ (string $data, string $salt)  
 string EasyCrypt:: __decrypt__ (string $data, string $salt)
 
 ### 概　要
@@ -27,10 +27,10 @@ string EasyCrypt:: __decrypt__ (string $data, string $salt)
     <?php
     
     $data = 'This is a very secret data.';
-    $key  = 'This is a very secret key.' ;
+    $salt = 'This is a very secret key.' ;
     
-    $enc = EasyCrypt::encrypt($data,$key);
-    $dec = EasyCrypt::decrypt($enc,$key);
+    $enc = EasyCrypt::encrypt($data,$salt);
+    $dec = EasyCrypt::decrypt($enc, $salt);
     
     var_dump($data,$enc,$dec);
     
@@ -124,8 +124,8 @@ string _$linkStyle=''_ [, string _$buttonStyle=''_
 ]]]]]] )
 
 ### 概　要
-簡単にaタグでPOSTが出来るリンクを張れます。
-多次元配列に対応しています。
+簡単にaタグでPOSTが出来るリンクを張れます。  
+多次元配列に対応しています。  
 JavaScriptが使えない場合はSubmitボタンで表示します。
 
 ### 使用例
