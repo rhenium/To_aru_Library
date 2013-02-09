@@ -63,7 +63,7 @@ class EasyCrypt {
 			return '';
 		list($iv,$data) = $arr;
 		mcrypt_generic_init($this->mc,$this->key,base64_decode($iv));
-		return rtrim(mdecrypt_generic($this->mc,base64_decode($data)),'\0');
+		return rtrim(mdecrypt_generic($this->mc,base64_decode($data)),"\0");
 	}
 
 }
