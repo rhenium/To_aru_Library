@@ -10,6 +10,18 @@ __CC0__ (No Rights Reserved)
 PHPにあると思ったけど無かった的な関数・クラス集。
 以前はTwitter関連も全部ここにまとめてありましたが分離させました。
 
+## [EasyCrypt]
+
+### メソッド仕様
+string EasyCrypt:: __encrypt__ (string $data, string $salt)
+string EasyCrypt:: __decrypt__ (string $data, string $salt)
+
+### 概　要
+暗号化と復号化を簡単に行えるクラスです。
+
+### 関数仕様
+bool __array\_slide__ (array _&$array_ , mixed _$key_ , int _$amount_ [, bool _$search\_target\_with\_order=false_ ] )
+
 ## [array_slide]
 
 ### 関数仕様
@@ -33,5 +45,6 @@ string _$linkStyle=''_ [, string _$buttonStyle=''_
 多次元配列に対応しています。
 JavaScriptが使えない場合はSubmitボタンで表示します。
 
+[EasyCrypt]: https://github.com/Certainist/To_aru_Library/blob/master/EasyCrypt.php
 [array_slide]: https://github.com/Certainist/To_aru_Library/blob/master/array_slide.php
 [VirtualForm]: https://github.com/Certainist/To_aru_Library/blob/master/VirtualForm.php
