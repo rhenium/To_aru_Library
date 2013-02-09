@@ -22,7 +22,7 @@ bool __array\_slide__ (array _&$array_ , mixed _$key_ , int _$amount_ [, bool _$
 
 ### メソッド仕様
 ($vfはクラスのインスタンス)  
-bool $vf-> __createLink__ ( array _$data_ [, 
+string $vf-> __createLink__ ( array _$data_ [, 
 string _$caption='submit'_ [, string _$action=''_ [, 
 string _$method='POST'_ [, string _$target='\_self'_ [, 
 string _$linkStyle=''_ [, string _$buttonStyle=''_ 
@@ -33,5 +33,5 @@ string _$linkStyle=''_ [, string _$buttonStyle=''_
 多次元配列に対応しています。
 JavaScriptが使えない場合はSubmitボタンで表示します。
 
-[TwitterText]: https://github.com/Certainist/To_aru_Library/blob/master/array_slide.php
+[array_slide]: https://github.com/Certainist/To_aru_Library/blob/master/array_slide.php
 [VirtualForm]: https://github.com/Certainist/To_aru_Library/blob/master/VirtualForm.php
