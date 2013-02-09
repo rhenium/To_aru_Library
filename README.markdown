@@ -17,10 +17,28 @@ string EasyCrypt:: __encrypt__ (string $data, string $salt)
 string EasyCrypt:: __decrypt__ (string $data, string $salt)
 
 ### 概　要
+
 暗号化と復号化を簡単に行えるクラスです。
 
-### 関数仕様
-bool __array\_slide__ (array _&$array_ , mixed _$key_ , int _$amount_ [, bool _$search\_target\_with\_order=false_ ] )
+
+### 使用例
+コード
+
+    <?php
+    
+    $data = 'This is a very secret data.';
+    $key  = 'This is a very secret key.' ;
+    
+    $enc = EasyCrypt::encrypt($data,$key);
+    $dec = EasyCrypt::decrypt($enc,$key);
+    
+    var_dump($data,$enc,$dec);
+    
+実行結果
+
+    string(27) "This is a very secret data."
+    string(89) "DCqphIJA2iTVf8WviemKp0KAU7+tcUUo2pVfLkYF8Sg=-3LLX6qY06882iltW5Wu8RycNgSJY0liNqZWnXI25isA="
+    string(27) "This is a very secret data."
 
 ## [array_slide]
 
@@ -29,6 +47,71 @@ bool __array\_slide__ (array _&$array_ , mixed _$key_ , int _$amount_ [, bool _$
 
 ### 概要
 参照渡しされた配列のうち指定した1つの要素を、任意の量で前後に移動させることが出来ます。
+
+### 使用例
+コード
+
+    <?php
+    
+    $arr = array('ド'=>'ドーナツ','レ'=>'レニウム','ミ'=>'ミカン','ファ'=>'ふぁぼれよ','ソ'=>'蒼井そら');
+    var_dump($arr);
+    array_slide($arr,'レ',2);
+    var_dump($arr);
+    array_slide($arr,3,999,true);
+    var_dump($arr);
+    array_slide($arr,'レ',-2,true);
+    var_dump($arr);
+    
+実行結果
+
+    array(5) {
+      ["ド"]=>
+      string(12) "ドーナツ"
+      ["レ"]=>
+      string(12) "レニウム"
+      ["ミ"]=>
+      string(9) "ミカン"
+      ["ファ"]=>
+      string(15) "ふぁぼれよ"
+      ["ソ"]=>
+      string(12) "蒼井そら"
+    }
+    array(5) {
+      ["ド"]=>
+      string(12) "ドーナツ"
+      ["ミ"]=>
+      string(9) "ミカン"
+      ["ファ"]=>
+      string(15) "ふぁぼれよ"
+      ["レ"]=>
+      string(12) "レニウム"
+      ["ソ"]=>
+      string(12) "蒼井そら"
+    }
+    array(5) {
+      ["ド"]=>
+      string(12) "ドーナツ"
+      ["ミ"]=>
+      string(9) "ミカン"
+      ["ファ"]=>
+      string(15) "ふぁぼれよ"
+      ["ソ"]=>
+      string(12) "蒼井そら"
+      ["レ"]=>
+      string(12) "レニウム"
+    }
+    array(5) {
+      ["ド"]=>
+      string(12) "ドーナツ"
+      ["ミ"]=>
+      string(9) "ミカン"
+      ["レ"]=>
+      string(12) "レニウム"
+      ["ファ"]=>
+      string(15) "ふぁぼれよ"
+      ["ソ"]=>
+      string(12) "蒼井そら"
+    }
 
 ## [VirtualForm]
 
@@ -44,6 +127,44 @@ string _$linkStyle=''_ [, string _$buttonStyle=''_
 簡単にaタグでPOSTが出来るリンクを張れます。
 多次元配列に対応しています。
 JavaScriptが使えない場合はSubmitボタンで表示します。
+
+### 使用例
+コード
+
+    $post = array(
+      'tokens' => array(
+        'access_token'        => '&&&',
+        'access_token_secret' => 'pass'
+      ),
+      'foo' => 'bar'
+    );
+    
+    $vf = new VirtualForm();
+    echo $vf->createLink(
+      $post,'Submit!!',basename(__FILE__),'POST','_self',
+      'color:red;text-decoration:green;','color:black;background:white;'
+    );
+    
+実行結果
+
+    <script type="text/javascript">
+    <!--
+    document.write('<a href="" onClick="document.postForm_0.submit();return false;" style="color:red;text-decoration:green;">Submit!!</a>\n');
+    document.write('<form name="postForm_0" method="POST" action="test.php">\n');
+    document.write('<input name="tokens[access_token]" type="hidden" value="&amp;&amp;&amp;" />\n');
+    document.write('<input name="tokens[access_token_secret]" type="hidden" value="pass" />\n');
+    document.write('<input name="foo" type="hidden" value="bar" />\n');
+    document.write('</form>\n');
+    //-->
+    </script>
+    <noscript>
+    <form method="POST" action="test.php">
+    <input name="tokens[access_token]" type="hidden" value="&amp;&amp;&amp;">
+    <input name="tokens[access_token_secret]" type="hidden" value="pass">
+    <input name="foo" type="hidden" value="bar">
+    <input type="submit" value="Submit!!" style="color:black;background:white;">
+    </form>
+    </noscript>
 
 [EasyCrypt]: https://github.com/Certainist/To_aru_Library/blob/master/EasyCrypt.php
 [array_slide]: https://github.com/Certainist/To_aru_Library/blob/master/array_slide.php

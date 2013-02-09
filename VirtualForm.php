@@ -44,6 +44,11 @@ class VirtualForm {
 	public function createLink($data,$caption='submit',$action='',$method='POST',$target='_self',$linkStyle='',$buttonStyle='') {
 		if (!is_array($data))
 			return '';
+		$a = array(&$caption,&$action,&$method,&$target,&$linkStyle,&$buttonStyle);
+		foreach ($a as &$i)
+			$i = htmlspecialchars($i,ENT_QUOTES);
+		unset($a);
+		unset($i);
 		if ($linkStyle  !=='')
 			$linkStyle   = sprintf(' style="%s"',$linkStyle);
 		if ($buttonStyle!=='')
@@ -52,11 +57,6 @@ class VirtualForm {
 			$target = sprintf(' target="%s"',$target);
 		else
 			$target = '';
-		$a = array(&$caption,&$action,&$method,&$target,&$linkStyle,&$buttonStyle);
-		foreach ($a as &$i)
-			$i = htmlspecialchars($i,ENT_QUOTES);
-		unset($a);
-		unset($i);
 		$parsed = $this->parse($data);
 		$text = '';
 		$text .= '<script type="text/javascript">'.PHP_EOL;
@@ -76,7 +76,7 @@ class VirtualForm {
 			$text .= sprintf('<input name="%s" type="hidden" value="%s">'.PHP_EOL,$key,$value);
 		$text .= sprintf('<input type="submit" value="%s"%s>'.PHP_EOL,$caption,$buttonStyle);
 		$text .= '</form>'.PHP_EOL;
-		$text .= '</noscript>'.PHP_EOL;
+		$text .= '</noscript>';
 		$this->formCnt++;
 		return $text;
 	}
