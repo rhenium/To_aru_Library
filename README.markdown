@@ -151,17 +151,17 @@ JavaScriptが使えない場合はSubmitボタンで表示します。
     <!--
     document.write('<a href="" onClick="document.postForm_0.submit();return false;" style="color:red;text-decoration:green;">Submit!!</a>\n');
     document.write('<form name="postForm_0" method="POST" action="test.php">\n');
-    document.write('<input name="tokens[access_token]" type="hidden" value="&amp;&amp;&amp;" />\n');
-    document.write('<input name="tokens[access_token_secret]" type="hidden" value="pass" />\n');
-    document.write('<input name="foo" type="hidden" value="bar" />\n');
+    document.write('<input type="hidden" name="tokens[access_token]" value="&amp;&amp;&amp;" />\n');
+    document.write('<input type="hidden" name="tokens[access_token_secret]" value="pass" />\n');
+    document.write('<input type="hidden" name="foo" value="bar" />\n');
     document.write('</form>\n');
     //-->
     </script>
     <noscript>
     <form method="POST" action="test.php">
-    <input name="tokens[access_token]" type="hidden" value="&amp;&amp;&amp;">
-    <input name="tokens[access_token_secret]" type="hidden" value="pass">
-    <input name="foo" type="hidden" value="bar">
+    <input type="hidden" name="tokens[access_token]" value="&amp;&amp;&amp;">
+    <input type="hidden" name="tokens[access_token_secret]" value="pass">
+    <input type="hidden" name="foo" value="bar">
     <input type="submit" value="Submit!!" style="color:black;background:white;">
     </form>
     </noscript>

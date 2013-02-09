@@ -66,14 +66,14 @@ class VirtualForm {
 		$text .= sprintf('document.write(\'<form name="postForm_%s" method="POST" action="%s">\\n\');'.PHP_EOL,
 				$this->formCnt,$action);
 		foreach ($parsed as $key => $value)
-			$text .= sprintf('document.write(\'<input name="%s" type="hidden" value="%s" />\\n\');'.PHP_EOL,$key,$value);
+			$text .= sprintf('document.write(\'<input type="hidden" name="%s" value="%s" />\\n\');'.PHP_EOL,$key,$value);
 		$text .= 'document.write(\'</form>\\n\');'.PHP_EOL;
 		$text .= '//-->'.PHP_EOL;
 		$text .= '</script>'.PHP_EOL;
 		$text .= '<noscript>'.PHP_EOL;
 		$text .= sprintf('<form method="%s" action="%s">'.PHP_EOL,$method,$action);
 		foreach ($parsed as $key => $value)
-			$text .= sprintf('<input name="%s" type="hidden" value="%s">'.PHP_EOL,$key,$value);
+			$text .= sprintf('<input type="hidden" name="%s" value="%s">'.PHP_EOL,$key,$value);
 		$text .= sprintf('<input type="submit" value="%s"%s>'.PHP_EOL,$caption,$buttonStyle);
 		$text .= '</form>'.PHP_EOL;
 		$text .= '</noscript>';
