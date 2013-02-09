@@ -32,17 +32,11 @@ function array_slide(&$array,$key,$amount,$search_target_with_order=false) {
 	$cnt = 0;
 	$parent = array();
 	foreach ($array as $_key => $value) {
-		if ($search_target_with_order) {
-			if ($_key==$key) {
+		if ($search_target_with_order && $key==$cnt ||
+		   !$search_target_with_order && $key==$_key) {
 				$target = array($_key=>$value);
 				$pos = $cnt;
-			}
-		} else {
-			if ($cnt==$key) {
-				$target = array($_key=>$value);
-				$pos = $cnt;
-			}
-		}
+		   }
 		$parent[] = array($_key=>$value);
 		$cnt++;
 	}
