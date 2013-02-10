@@ -18,7 +18,7 @@
 //      ⇒aでくくる文字列
 //    [ string $action      = '',       ]
 //      ⇒formのaction属性の値
-//    [ string $method      = 'POST',   ]
+//    [ string $method      = 'post',   ]
 //      ⇒formのmethod属性の値
 //    [ string $target      = '_self',  ]
 //      ⇒aのtarget属性の値
@@ -43,7 +43,7 @@ class VirtualForm {
 		$this->formCnt = 0;
 	}
 	
-	public function createLink($data,$caption='submit',$action='',$method='POST',$target='_self',$linkStyle='',$buttonStyle='') {
+	public function createLink($data,$caption='submit',$action='',$method='post',$target='_self',$linkStyle='',$buttonStyle='') {
 		if (!is_array($data))
 			return '';
 		$a = array(&$caption,&$action,&$method,&$target,&$linkStyle,&$buttonStyle);
@@ -60,13 +60,12 @@ class VirtualForm {
 		else
 			$target = '';
 		$parsed = $this->parse($data);
-		$text  = '//<![CDATA[';
-		$text .= '<script type="text/javascript">'.PHP_EOL;
-		$text .= '<![CDATA'.PHP_EOL;
-		$text .= sprintf('document.write(\'<a href="" onClick="document.postForm_%s.submit();return false;"%s%s>%s</a>\\n\');'.PHP_EOL,
+		$text  = '<script type="text/javascript">'.PHP_EOL;
+		$text .= '//<![CDATA['.PHP_EOL;
+		$text .= sprintf('document.write(\'<a href="javascript:void(0);" onclick="document.postForm_%s.submit();return false;"%s%s>%s</a>\\n\');'.PHP_EOL,
 				$this->formCnt,$target,$linkStyle,$caption);
-		$text .= sprintf('document.write(\'<form name="postForm_%s" method="POST" action="%s">\\n\');'.PHP_EOL,
-				$this->formCnt,$action);
+		$text .= sprintf('document.write(\'<form name="postForm_%s" method="%s" action="%s">\\n\');'.PHP_EOL,
+				$this->formCnt,$method,$action);
 		foreach ($parsed as $key => $value)
 			$text .= sprintf('document.write(\'<input type="hidden" name="%s" value="%s" />\\n\');'.PHP_EOL,$key,$value);
 		$text .= 'document.write(\'</form>\\n\');'.PHP_EOL;

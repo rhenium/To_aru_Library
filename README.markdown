@@ -119,7 +119,7 @@ bool __array\_slide__ (array _&$array_ , mixed _$key_ , int _$amount_ [, bool _$
 ($vfはクラスのインスタンス)  
 string $vf-> __createLink__ ( array _$data_ [, 
 string _$caption='submit'_ [, string _$action=''_ [, 
-string _$method='POST'_ [, string _$target='\_self'_ [, 
+string _$method='post'_ [, string _$target='\_self'_ [, 
 string _$linkStyle=''_ [, string _$buttonStyle=''_ 
 ]]]]]] )
 
@@ -141,28 +141,28 @@ JavaScriptが使えない場合はSubmitボタンで表示します。
     
     $vf = new VirtualForm();
     echo $vf->createLink(
-      $post,'Submit!!',basename(__FILE__),'POST','_self',
+      $post,'Submit!!',basename(__FILE__),'post','_self',
       'color:red;text-decoration:green;','color:black;background:white;'
     );
     
 実行結果
 
     <script type="text/javascript">
-    <!--
-    document.write('<a href="" onClick="document.postForm_0.submit();return false;" style="color:red;text-decoration:green;">Submit!!</a>\n');
-    document.write('<form name="postForm_0" method="POST" action="test.php">\n');
+    //<![CDATA[
+    document.write('<a href="javascript:void(0);" onclick="document.postForm_0.submit();return false;" style="color:red;text-decoration:green;">Submit!!</a>\n');
+    document.write('<form name="postForm_0" method="post" action="test.php">\n');
     document.write('<input type="hidden" name="tokens[access_token]" value="&amp;&amp;&amp;" />\n');
     document.write('<input type="hidden" name="tokens[access_token_secret]" value="pass" />\n');
     document.write('<input type="hidden" name="foo" value="bar" />\n');
     document.write('</form>\n');
-    //-->
+    //]]>
     </script>
     <noscript>
-    <form method="POST" action="test.php">
-    <input type="hidden" name="tokens[access_token]" value="&amp;&amp;&amp;">
-    <input type="hidden" name="tokens[access_token_secret]" value="pass">
-    <input type="hidden" name="foo" value="bar">
-    <input type="submit" value="Submit!!" style="color:black;background:white;">
+    <form method="post" action="test.php">
+    <input type="hidden" name="tokens[access_token]" value="&amp;&amp;&amp;" />
+    <input type="hidden" name="tokens[access_token_secret]" value="pass" />
+    <input type="hidden" name="foo" value="bar" />
+    <input type="submit" value="Submit!!" style="color:black;background:white;" />
     </form>
     </noscript>
 
