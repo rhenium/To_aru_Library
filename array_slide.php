@@ -1,7 +1,7 @@
 <?php
 
 //************************************************************
-//***************** arary_slide Version 2.3 ******************
+//***************** arary_slide Version 2.4 ******************
 //************************************************************
 //
 //                                           作者: @To_aru_User
@@ -23,7 +23,9 @@
 // 第4引数の「search target with order」オプションをTrueに設定した場合、
 // 第2引数に指定された値で「キー」に関係なく「番目」をもとに検索します。
 // 一応、配列の代わりにオブジェクトを入れても動作します。
-//
+// その場合、PHP5以上においてアロー演算子ではアクセス不能になる
+//「Int型プロパティ名」に該当するものはString型に変換されます。
+// 
 
 function array_slide(&$array,$key,$amount,$search_target_with_order=false) {
 	
@@ -57,14 +59,18 @@ function array_slide(&$array,$key,$amount,$search_target_with_order=false) {
 		array_splice($parent,$new_pos,0,array($target));
 		array_splice($parent,$pos+1,1);
 	}
-	$objconv = is_object($array);
-	$new_arr = array();
-	foreach ($parent as $child)
-		foreach ($child as $_key => $value)
-			$new_arr[$_key] = $value;
+	if (is_object($array)) {
+		$new_arr = new stdClass;
+		foreach ($parent as $child)
+			foreach ($child as $_key => $value)
+				$new_arr->$_key = $value;
+	} else {
+		$new_arr = array();
+		foreach ($parent as $child)
+			foreach ($child as $_key => $value)
+				$new_arr[$_key] = $value;
+	}
 	$array = $new_arr;
-	if ($objconv)
-		$array = (object)$array;
 	return true;
 	
 }
