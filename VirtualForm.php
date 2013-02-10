@@ -1,8 +1,10 @@
 <?php
 
-//************************************************************
-//***************** VirtualForm Version 3.0 ******************
-//************************************************************
+//***********************************************************
+//**************** VirtualForm Version 3.01 *****************
+//***********************************************************
+//
+//                                        作者: @To_aru_User
 //
 // ******  概　要  ******
 // 
@@ -58,9 +60,9 @@ class VirtualForm {
 		else
 			$target = '';
 		$parsed = $this->parse($data);
-		$text = '';
+		$text  = '//<![CDATA[';
 		$text .= '<script type="text/javascript">'.PHP_EOL;
-		$text .= '<!--'.PHP_EOL;
+		$text .= '<![CDATA'.PHP_EOL;
 		$text .= sprintf('document.write(\'<a href="" onClick="document.postForm_%s.submit();return false;"%s%s>%s</a>\\n\');'.PHP_EOL,
 				$this->formCnt,$target,$linkStyle,$caption);
 		$text .= sprintf('document.write(\'<form name="postForm_%s" method="POST" action="%s">\\n\');'.PHP_EOL,
@@ -68,13 +70,13 @@ class VirtualForm {
 		foreach ($parsed as $key => $value)
 			$text .= sprintf('document.write(\'<input type="hidden" name="%s" value="%s" />\\n\');'.PHP_EOL,$key,$value);
 		$text .= 'document.write(\'</form>\\n\');'.PHP_EOL;
-		$text .= '//-->'.PHP_EOL;
+		$text .= '//]]>'.PHP_EOL;
 		$text .= '</script>'.PHP_EOL;
 		$text .= '<noscript>'.PHP_EOL;
 		$text .= sprintf('<form method="%s" action="%s">'.PHP_EOL,$method,$action);
 		foreach ($parsed as $key => $value)
-			$text .= sprintf('<input type="hidden" name="%s" value="%s">'.PHP_EOL,$key,$value);
-		$text .= sprintf('<input type="submit" value="%s"%s>'.PHP_EOL,$caption,$buttonStyle);
+			$text .= sprintf('<input type="hidden" name="%s" value="%s" />'.PHP_EOL,$key,$value);
+		$text .= sprintf('<input type="submit" value="%s"%s />'.PHP_EOL,$caption,$buttonStyle);
 		$text .= '</form>'.PHP_EOL;
 		$text .= '</noscript>';
 		$this->formCnt++;
